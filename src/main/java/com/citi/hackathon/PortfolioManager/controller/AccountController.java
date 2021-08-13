@@ -3,8 +3,7 @@ package com.citi.hackathon.PortfolioManager.controller;
 
 import com.citi.hackathon.PortfolioManager.entities.Account;
 import com.citi.hackathon.PortfolioManager.service.AccountService;
-import com.citi.hackathon.PortfolioManager.service.AccountServiceImpl;
-import com.citi.hackathon.PortfolioManager.service.InvestmentService;
+import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,8 @@ public class AccountController {
 
     @Autowired
     private AccountService accountService;
-    @Autowired
-    private InvestmentService investmentService;
 
+    @ApiOperation(value = "findAll", nickname = "findAll")
     @GetMapping
     public List<Account> getAccounts(){
         logger.info("Request for all accounts");
@@ -32,8 +30,12 @@ public class AccountController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public Account getAccountById(@PathVariable("id") int id){
+        logger.info("Request for account id: " + id);
         return accountService.getAccountById(id);
     }
 
-
+    @RequestMapping(method = RequestMethod.POST)
+    public void addAccount(@RequestBody Account account){
+        accountService.addNewAccount(account);
+    }
 }

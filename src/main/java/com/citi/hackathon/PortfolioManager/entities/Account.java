@@ -2,6 +2,8 @@ package com.citi.hackathon.PortfolioManager.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity @Table(name="accounts")
 public class Account implements Serializable {
@@ -71,4 +73,19 @@ public class Account implements Serializable {
     public void setCashValue(Double cashValue) {
         this.cashValue = cashValue;
     }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+    @JoinColumn(name="account_id", referencedColumnName="id")
+    @OneToMany( cascade={CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Transaction> transactions = new ArrayList<Transaction>();
+
+
+
 }

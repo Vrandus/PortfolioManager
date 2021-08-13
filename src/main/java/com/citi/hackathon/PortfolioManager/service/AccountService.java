@@ -2,6 +2,7 @@ package com.citi.hackathon.PortfolioManager.service;
 
 
 import com.citi.hackathon.PortfolioManager.entities.Account;
+import com.citi.hackathon.PortfolioManager.entities.Transaction;
 
 import java.util.List;
 
@@ -13,9 +14,11 @@ public interface AccountService {
     // accountType be either "Cash" or "Investment"
     List<Account> getAccountsByType(String accountType);
 
-    void addNewAccount(Account newAccount);
+    Account addNewAccount(Account newAccount);
 
     void deleteAccount(Integer id);
 
     void updateExistingAccount(Account account);
+
+    List<Transaction> getAllTransactionsByAccountId(Integer id);
 }

@@ -1,6 +1,7 @@
 package com.citi.hackathon.PortfolioManager.service;
 
 import com.citi.hackathon.PortfolioManager.entities.Account;
+import com.citi.hackathon.PortfolioManager.entities.Transaction;
 import com.citi.hackathon.PortfolioManager.repos.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public Account getAccountById(Integer id) {
-        return null;
+        return accountRepo.findAccountById(id);
     }
 
     @Override
@@ -28,7 +29,9 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public void addNewAccount(Account newAccount) {
+    public Account addNewAccount(Account newAccount) {
+        newAccount.setId(0);
+        return accountRepo.save(newAccount);
 
     }
 
@@ -39,6 +42,12 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public void updateExistingAccount(Account account) {
+
+    }
+
+    @Override
+    public List<Transaction> getAllTransactionsByAccountId(Integer id) {
+        return accountRepo.findAccountById(id).getTransactions();
 
     }
 }
