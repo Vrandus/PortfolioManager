@@ -3,10 +3,10 @@
 CREATE SCHEMA `portfolio` ;
 
 
--- Generate account table
-CREATE TABLE `portfolio`.`account` (
+-- Generate accounts table
+CREATE TABLE `portfolio`.`accounts` (
                                        `id` INT NOT NULL AUTO_INCREMENT,
-                                       `account_type` VARCHAR(64) NOT NULL COMMENT 'Only \"Investing\" or \"Cash\"',
+                                       `account_type` VARCHAR(64) NOT NULL COMMENT 'Only \"Investment\" or \"Cash\"',
                                        `bank_name` VARCHAR(64) NULL COMMENT 'Name of brokerage',
                                        `description` VARCHAR(128) NULL COMMENT 'Description of the account type',
                                        `cash_value` DECIMAL(3) NULL COMMENT 'only set if cash account',
@@ -27,6 +27,6 @@ CREATE TABLE `portfolio`.`investments` (
   INDEX `fk_investments_account_id_idx` (`account_id` ASC) VISIBLE,
   CONSTRAINT `fk_investments_account_id`
     FOREIGN KEY (`account_id`)
-    REFERENCES `portfolio`.`account` (`id`)
+    REFERENCES `portfolio`.`accounts` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
