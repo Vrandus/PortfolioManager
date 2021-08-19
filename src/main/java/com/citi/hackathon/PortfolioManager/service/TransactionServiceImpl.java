@@ -12,6 +12,10 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
     private TransactionRepository transactionRepo;
+
+    @Autowired
+    private TickerDataService tickerDataService;
+
     @Override
     public List<Transaction> getAllTransactions() {
         return transactionRepo.findAll();
@@ -27,6 +31,10 @@ public class TransactionServiceImpl implements TransactionService {
         transaction.setId(0);
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
         transaction.setTransactionTime(currentTimestamp);
+
+        Double price = tickerDataService.getResultByTicker(transaction.getTicker()).getRegularMarketPrice();
+        transaction.setUnitPrice(price);
+
         return transactionRepo.save(transaction);
     }
 

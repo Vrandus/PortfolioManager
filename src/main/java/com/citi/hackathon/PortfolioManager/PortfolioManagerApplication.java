@@ -14,19 +14,12 @@ import org.springframework.web.client.RestTemplate;
 @Import(SwaggerConfig.class)
 public class PortfolioManagerApplication {
 
-// 	@Bean
-// 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-// 		return builder.build();
-// 	}
+ 	@Bean
+ 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
+ 		return builder.build();
+ 	}
 
-// 	@Bean
-// 	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
-// 		return args -> {
-// 			Quote quote = restTemplate.getForObject(
-// 					"https://quoters.apps.pcfone.io/api/random", Quote.class);
-// 			log.info(quote.toString());
-// 		};
-// 	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(PortfolioManagerApplication.class, args);
 	}
