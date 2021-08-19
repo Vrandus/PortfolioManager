@@ -1,6 +1,11 @@
 package com.citi.hackathon.PortfolioManager.service;
 
+import com.citi.hackathon.PortfolioManager.util.Result;
+
+import java.util.List;
+
 public interface TickerDataService {
 
-    Double getPriceByTicker(String ticker);
+    Result getResultByTicker(String ticker);
+    List<Result> getResultsByTickers(String[] ticker);
 }

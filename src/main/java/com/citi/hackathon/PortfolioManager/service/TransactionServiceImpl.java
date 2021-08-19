@@ -32,8 +32,8 @@ public class TransactionServiceImpl implements TransactionService {
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
         transaction.setTransactionTime(currentTimestamp);
 
-        Double price = tickerDataService.getPriceByTicker("AMD");
-        System.out.println("Price of AMD"+price);
+        Double price = tickerDataService.getResultByTicker(transaction.getTicker()).getRegularMarketPrice();
+        transaction.setUnitPrice(price);
 
         return transactionRepo.save(transaction);
     }
