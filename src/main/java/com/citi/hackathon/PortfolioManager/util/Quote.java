@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Quote {
 
-    private Double regularMarketPrice;
+    private QuoteResponse quoteResponse;
 
-    public Double getRegularMarketPrice() {
-        return regularMarketPrice;
+    public QuoteResponse getQuoteResponse() {
+        return quoteResponse;
     }
 
-    public void setRegularMarketPrice(Double regularMarketPrice) {
-        this.regularMarketPrice = regularMarketPrice;
+    public void setQuoteResponse(QuoteResponse quoteResponse) {
+        this.quoteResponse = quoteResponse;
     }
 }

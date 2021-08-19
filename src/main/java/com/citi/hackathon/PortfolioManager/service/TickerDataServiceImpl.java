@@ -1,6 +1,7 @@
 package com.citi.hackathon.PortfolioManager.service;
 
 import com.citi.hackathon.PortfolioManager.util.Quote;
+import com.citi.hackathon.PortfolioManager.util.QuoteResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,41 +45,29 @@ public class TickerDataServiceImpl implements TickerDataService {
         HttpEntity request = new HttpEntity(headers);
 
         // make an HTTP GET request with headers
-        ResponseEntity<String> response1 = restTemplate.exchange(
+        ResponseEntity<Quote> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 request,
-                String.class,
+                Quote.class,
                 ticker
         );
 
         try {
 
             // check response
-            if (response1.getStatusCode() == HttpStatus.OK) {
+            if (response.getStatusCode() == HttpStatus.OK) {
 
                 System.out.println("Request Successful.");
-                System.out.println(response1.getBody());
+                System.out.println(response.getBody());
 
-                String json = response1.getBody();
+                QuoteResponse q = response.getBody().getQuoteResponse();
 
-
-
-                ObjectMapper objectMapper = new ObjectMapper();
-
-                System.out.println("DEBUG 1=====");
-
-                JsonNode jsonNode = objectMapper.readTree(json);
-
-                System.out.println("DEBUG 2=====");
-
-                System.out.println(jsonNode.get("quoteResponse").asText());
-
-
+                System.out.println("Price:"+q.getResult().get(0).getRegularMarketPrice());
 
             } else {
                 System.out.println("Request Failed");
-                System.out.println(response1.getStatusCode());
+                System.out.println(response.getStatusCode());
             }
 
         } catch(Exception e){
